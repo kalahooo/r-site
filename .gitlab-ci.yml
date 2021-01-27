@@ -1,0 +1,12 @@
+image: node:12-alpine
+
+build:
+  stage: build
+  script: 
+    - docker build -t redmond-site-image .
+    - docker stop redmond-site-container || true
+    - docker run -d -p 3013:3000 --rm --name redmond-site-container redmond-site-image
+    - docker image prune -f
+  
+
+    
